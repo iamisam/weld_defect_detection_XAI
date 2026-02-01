@@ -1,0 +1,17 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+RIAWELC_Dataset/
+results/gradcam_outputs/
+results_optimized/gradcam_outputs/
+results/*.csv
+results_optimized/*.csv
+models/

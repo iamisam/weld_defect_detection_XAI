@@ -1,0 +1,6 @@
+Class,Expected (Count),Output (Predicted),Correct,Wrong,Accuracy (%),Precision,Recall,F1-Score
+crack,765,765,761,4,99.48,0.9948,0.9948,0.9948
+lack_of_penetration,446,447,443,3,99.33,0.9911,0.9933,0.9922
+no_defect,600,602,600,0,100.0,0.9967,1.0,0.9983
+porosity,632,629,628,4,99.37,0.9984,0.9937,0.996
+AVERAGE,2443,2443,2432,11,99.55,0.9952,0.9954,0.9953

@@ -15,3 +15,7 @@ results_optimized/gradcam_outputs/
 results/*.csv
 results_optimized/*.csv
 models/
+lbf_digitized_films/
+images_new_set/
+pictures/
+proj_gokul/

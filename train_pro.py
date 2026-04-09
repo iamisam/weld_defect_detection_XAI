@@ -123,7 +123,7 @@ def train_optimized():
         train_acc = correct.double() / total
         
         model.eval()
-        val_running_loss = 0.0 # NEW: Track val loss
+        val_running_loss = 0.0
         val_correct = 0
         val_total = 0
         

@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # 1. Load Image (Grayscale)
 # Replace with your filename
-img_path = "test_img.jpg"
+img_path = "test_img2.jpg"
 img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
 
 if img is None:
@@ -14,7 +14,7 @@ if img is None:
 # 2. Top-Hat Transform
 # We use a kernel roughly the size of a letter (e.g., 25x25)
 # This operation effectively subtracts the background.
-kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (25, 25))
+kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (45, 45))
 tophat = cv2.morphologyEx(img, cv2.MORPH_TOPHAT, kernel)
 
 # 3. Threshold the Top-Hat Result

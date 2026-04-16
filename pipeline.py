@@ -8,6 +8,7 @@ from PIL import Image
 import os
 
 from candidate_detector import CandidateDetector
+from image_segmentation.segmentation_hub import SegmentationHub
 
 
 def run_full_pipeline(image_path, model_path="models/best_optimized_resnet18.pth"):
@@ -85,24 +86,29 @@ def run_full_pipeline(image_path, model_path="models/best_optimized_resnet18.pth
         
         print(f"{predicted_class} ({confidence_score:.1%})")
         
-        # GradCAM (only for actual defects)
-        gradcam_img = None
-        if predicted_class.lower() != 'no_defect':
+        # DECISION DIAMOND: Threshold Check (> 80%) & Not "No Defect"
+        if confidence_score > 0.90 and predicted_class.lower() != 'no_defect':
+            
+            # Stream B: Grad-CAM XAI
             heatmap = cam(input_tensor=input_tensor, targets=None)[0, :]
             gradcam_img = show_cam_on_image(rgb_float, heatmap, use_rgb=True)
-        
-        results.append({
-            'candidate_id': idx + 1,
-            'bbox': detection_results['bboxes'][idx],
-            'class': predicted_class,
-            'confidence': confidence_score,
-            'roi': roi,
-            'gradcam': gradcam_img,
-            'probabilities': {
-                class_names[i]: probabilities[0][i].item() 
-                for i in range(len(class_names))
-            }
-        })
+            
+            # Stream A: Publish Label (Only append if it passed the threshold)
+            results.append({
+                'candidate_id': idx + 1,
+                'bbox': detection_results['bboxes'][idx],
+                'class': predicted_class,
+                'confidence': confidence_score,
+                'roi': roi,
+                'gradcam': gradcam_img,
+                'raw_heatmap': heatmap,
+                'probabilities': {
+                    class_names[i]: probabilities[0][i].item() 
+                    for i in range(len(class_names))
+                }
+            })
+        else:
+            print("-> Rejected by Decision Diamond (Low Confidence or No Defect)")
     
     # Step 3: Summarize defects
     print(f"\n[3/3] Summary:")
@@ -126,13 +132,17 @@ def run_full_pipeline(image_path, model_path="models/best_optimized_resnet18.pth
         if r['class'].lower() != 'no_defect':
             bbox = r['bbox']
             print(f"  • {r['class']} at ({bbox[0]}, {bbox[1]}) - {r['confidence']:.1%} confidence")
+
+    segmentation_hub = SegmentationHub()
+    segmentation_records = segmentation_hub.process_pipeline_results(results)
     
     return {
         'image_path': image_path,
         'num_candidates': num_candidates,
         'defect_summary': defect_summary,
         'results': results,
-        'cleaned_image': detection_results['cleaned_image']
+        'cleaned_image': detection_results['cleaned_image'],
+        'segmentation_data': segmentation_records
     }
 
 

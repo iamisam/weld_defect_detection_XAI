@@ -19,6 +19,7 @@ dependencies = [
     "seaborn>=0.13",
     "segmentation-models-pytorch>=0.5.0",
     "streamlit>=1.56.0",
+    "timm>=1.0.26",
     "torch>=2.11.0",
     "torchaudio>=2.11.0",
     "torchvision>=0.26.0",

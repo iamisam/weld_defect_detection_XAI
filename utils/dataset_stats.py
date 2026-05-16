@@ -46,17 +46,17 @@ datasets = {
     "neu": "segmentation_pretraining_dataset/train/neu",
     "dagm": "segmentation_pretraining_dataset/train/dagm",
     "sev": "segmentation_pretraining_dataset/train/sev",
-    "gokul": "segmentation_finetuning_augmented_dataset/train/gokul",
+    "custom": "segmentation_finetuning_augmented_dataset/train/gokul",
     "gdx": "segmentation_finetuning_augmented_dataset/train/gdx",
     "neut": "segmentation_pretraining_dataset/test/neu",
     "dagmt": "segmentation_pretraining_dataset/test/dagm",
     "sevt": "segmentation_pretraining_dataset/test/sev",
-    "gokult": "segmentation_finetuning_augmented_dataset/test/gokul",
+    "customt": "segmentation_finetuning_augmented_dataset/test/gokul",
     "gdxt": "segmentation_finetuning_augmented_dataset/test/gdx",
     "neuv": "segmentation_pretraining_dataset/val/neu",
     "dagmv": "segmentation_pretraining_dataset/val/dagm",
     "sevv": "segmentation_pretraining_dataset/val/sev",
-    "gokulv": "segmentation_finetuning_augmented_dataset/val/gokul",
+    "customv": "segmentation_finetuning_augmented_dataset/val/gokul",
     "gdxv": "segmentation_finetuning_augmented_dataset/val/gdx"
 }
 

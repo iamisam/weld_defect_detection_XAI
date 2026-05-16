@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 BASE_PLOTS = "D:/weld_defect_project/segmentation_model/plots"
 os.makedirs(BASE_PLOTS, exist_ok=True)
 
-df = pd.read_csv("classification_distribution_all_splits.csv")
+df = pd.read_csv("class_distribution_all_splits.csv")
 
 # ---------- BAR PLOTS (log + normal + %) ----------
 for split in ["train","val","test"]:
